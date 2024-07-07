@@ -1,0 +1,14 @@
+{
+  "name": "watcher-knight",
+  "version": "1.0.0",
+  "description": "fourth hollow dev challenge",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ARFI Manel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
