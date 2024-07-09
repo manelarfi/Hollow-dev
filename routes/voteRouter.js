@@ -1,7 +1,10 @@
 const express = require('express')
 const router = express.Router();
+const { getVote , makeNewVote} = require('../controllers/votingControllers')
+const validateToken = require('../middlewares/validateTokenHandler')
 
-router.post('vote', (req,res) => {
-    res.status(200).json("vote done")
-});
+router.use(validateToken)
+router.post('/vote', makeNewVote);
+router.get('/myvote', getVote)
 
+module.exports = router

@@ -20,6 +20,11 @@ const registerUser = asyncHandler(async (req, res) => {
     if (userAvailable) {
         return res.status(409).json({ message: "User already exists" }); // Changed to 409 for conflict
     }
+
+    const usernameAvailable = await User.findOne({ username });
+    if(usernameAvailable) {
+        return res.status(404).json({message : "choose another username"})
+    }
     
     try {
         // Hash the password
@@ -30,7 +35,7 @@ const registerUser = asyncHandler(async (req, res) => {
             username,
             email,
             password: hashedPassword,
-            accType: 1,
+            accType: 0,
         });
         
         console.log(`User Created ${user}`);
@@ -60,7 +65,7 @@ const loginUser = asyncHandler(async (req, res) => {
             const accessToken = await jwt.sign(
                 { user: { username: user.username, email: user.email, id: user.id } },
                 process.env.ACCESS_TOKEN_SECRET, 
-            { expiresIn: 120 }
+            { expiresIn: "120m" }
             )
             res.status(200).json(accessToken)
         } else {

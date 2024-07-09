@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+// accType => 0 admin,
+//            1 normal user
+//            2 candidate
+
 const userSchema = mongoose.Schema({
     username: {
         type: String,
